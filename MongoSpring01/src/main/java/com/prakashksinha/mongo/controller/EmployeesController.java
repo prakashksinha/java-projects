@@ -21,15 +21,19 @@ public class EmployeesController {
 
   @RequestMapping(value = "/employees", method = RequestMethod.GET)  
   public String getEmployeesList(ModelMap model) {  
-    model.addAttribute("employeesList", employeesService.listEmployees());    
-    return "display";    
+    try {
+		model.addAttribute("employeesList", employeesService.listEmployees());
+	} catch (Exception e) {
+		System.out.println("Error:" + e.getCause());
+	}
+	return "display";    
   }  
   
   @RequestMapping(value = "/employees/save", method = RequestMethod.POST)  
   public View createEmployees(@ModelAttribute Employees employees, ModelMap model) {
     if(StringUtils.hasText(employees.getId())) { 
       employeesService.updateEmployees(employees);
-    } else if (!employees.getName().isEmpty()) { 
+    } else if (StringUtils.hasLength(employees.getName()) ) { 
       employeesService.addEmployees(employees);
     } 
     return new RedirectView("/MongoSpring01/employees");  
