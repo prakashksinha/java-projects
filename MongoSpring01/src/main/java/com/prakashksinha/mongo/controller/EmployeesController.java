@@ -29,7 +29,7 @@ public class EmployeesController {
   public View createEmployees(@ModelAttribute Employees employees, ModelMap model) {
     if(StringUtils.hasText(employees.getId())) { 
       employeesService.updateEmployees(employees);
-    } else { 
+    } else if (!employees.getName().isEmpty()) { 
       employeesService.addEmployees(employees);
     } 
     return new RedirectView("/MongoSpring01/employees");  
