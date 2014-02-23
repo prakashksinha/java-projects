@@ -22,9 +22,9 @@ public class EmployeesController {
   @RequestMapping(value = "/employees", method = RequestMethod.GET)  
   public String getEmployeesList(ModelMap model) {  
     try {
-		model.addAttribute("employeesList", employeesService.listEmployees());
+      model.addAttribute("employeesList", employeesService.listEmployees());
 	} catch (Exception e) {
-		System.out.println("Error:" + e.getCause());
+	  System.out.println("Error:" + e.getCause());
 	}
 	return "display";    
   }  
